@@ -5,13 +5,17 @@ networks:
     external: true
 
 services:
+  zammad-init:
+    restart: "no"  # CRÍTICO: evita el loop infinito
+    networks:
+      - default
+
   zammad-nginx:
     networks:
       - default
       - dokploy-network
-    ports: []  # Eliminar el expose para evitar conflictos
+    ports: []
 
-  # Los demás servicios solo necesitan la red default
   zammad-railsserver:
     networks:
       - default
@@ -25,10 +29,6 @@ services:
       - default
 
   zammad-elasticsearch:
-    networks:
-      - default
-
-  zammad-init:
     networks:
       - default
 
