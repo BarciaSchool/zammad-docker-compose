@@ -1,0 +1,55 @@
+version: "3.8"
+
+networks:
+  dokploy-network:
+    external: true
+
+services:
+  zammad-nginx:
+    networks:
+      - default
+      - dokploy-network
+    ports: []  # Eliminamos el expose y usamos solo Traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.zammad-barciaschool.rule=Host(`zammad.tudominio.com`)"
+      - "traefik.http.routers.zammad-barciaschool.entrypoints=websecure"
+      - "traefik.http.routers.zammad-barciaschool.tls.certResolver=letsencrypt"
+      - "traefik.http.services.zammad-barciaschool.loadbalancer.server.port=8080"
+      - "traefik.docker.network=dokploy-network"
+
+  zammad-railsserver:
+    networks:
+      - default
+
+  zammad-scheduler:
+    networks:
+      - default
+
+  zammad-websocket:
+    networks:
+      - default
+
+  zammad-elasticsearch:
+    networks:
+      - default
+
+  zammad-init:
+    networks:
+      - default
+
+  zammad-memcached:
+    networks:
+      - default
+
+  zammad-postgresql:
+    networks:
+      - default
+
+  zammad-redis:
+    networks:
+      - default
+
+  zammad-backup:
+    networks:
+      - default
