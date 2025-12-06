@@ -12,7 +12,7 @@ services:
     ports: []  # Eliminamos el expose y usamos solo Traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.zammad-barciaschool.rule=Host(`zammad.tudominio.com`)"
+      - "traefik.http.routers.zammad-barciaschool.rule=Host(`zammad.asesoriasmurillo.com`)"
       - "traefik.http.routers.zammad-barciaschool.entrypoints=websecure"
       - "traefik.http.routers.zammad-barciaschool.tls.certResolver=letsencrypt"
       - "traefik.http.services.zammad-barciaschool.loadbalancer.server.port=8080"
