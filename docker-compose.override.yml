@@ -9,15 +9,9 @@ services:
     networks:
       - default
       - dokploy-network
-    ports: []  # Eliminamos el expose y usamos solo Traefik
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.zammad-barciaschool.rule=Host(`zammad.asesoriasmurillo.com`)"
-      - "traefik.http.routers.zammad-barciaschool.entrypoints=websecure"
-      - "traefik.http.routers.zammad-barciaschool.tls.certResolver=letsencrypt"
-      - "traefik.http.services.zammad-barciaschool.loadbalancer.server.port=8080"
-      - "traefik.docker.network=dokploy-network"
+    ports: []  # Eliminar el expose para evitar conflictos
 
+  # Los demás servicios solo necesitan la red default
   zammad-railsserver:
     networks:
       - default
