@@ -43,7 +43,7 @@ services:
 
   # --- Inicializador de Zammad (Setup) ---
   zammad-init:
-    image: ghcr.io/zammad/zammad:6.3.1-41
+    image: ghcr.io/zammad/zammad:latest
     command: ["zammad-init"]
     depends_on:
       zammad-postgresql:
@@ -63,7 +63,7 @@ services:
 
   # --- Servidor Principal (Rails) ---
   zammad-railsserver:
-    image: ghcr.io/zammad/zammad:6.3.1-41
+    image: ghcr.io/zammad/zammad:latest
     command: ["zammad-railsserver"]
     environment: *zammad-env
     depends_on:
@@ -77,7 +77,7 @@ services:
 
   # --- Tareas Programadas (Scheduler) ---
   zammad-scheduler:
-    image: ghcr.io/zammad/zammad:6.3.1-41
+    image: ghcr.io/zammad/zammad:latest
     command: ["zammad-scheduler"]
     environment: *zammad-env
     depends_on:
@@ -89,7 +89,7 @@ services:
 
   # --- WebSockets (Notificaciones en vivo) ---
   zammad-websocket:
-    image: ghcr.io/zammad/zammad:6.3.1-41
+    image: ghcr.io/zammad/zammad:latest
     command: ["zammad-websocket"]
     environment: *zammad-env
     depends_on:
@@ -97,9 +97,9 @@ services:
         condition: service_started
     restart: always
 
-  # --- Servidor Web (Conectar Dominio AQUÍ) ---
+  # --- Servidor Web (Nginx - Conecta tu dominio AQUÍ) ---
   zammad-nginx:
-    image: ghcr.io/zammad/zammad:6.3.1-41
+    image: ghcr.io/zammad/zammad:latest
     command: ["zammad-nginx"]
     environment: 
       <<: *zammad-env
